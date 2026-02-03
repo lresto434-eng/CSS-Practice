@@ -350,11 +350,174 @@ h3{
 /*
   On phones, 3 columns become too tight,
   so we convert the grid to 1 column.
-*/
-@media (max-width: 900px){
-  .footer-grid{
-    grid-template-columns: 1fr;
-    gap: 24px;
+/* =========================================================
+   MOBILE FIX PACK (for phones)
+   Put this at the BOTTOM of your CSS so it overrides earlier rules.
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   WHY WE NEED THIS:
+   Phones are narrow.
+   Desktop CSS often assumes a wide screen.
+   So big text + horizontal menus overflow.
+   "Overflow" = content wider than the screen.
+   When content overflows, the browser either:
+   - cuts it off
+   - makes sideways scrolling
+   - or squishes things in ugly ways
+--------------------------------------------------------- */
+
+@media (max-width: 600px){
+
+  /* =======================================================
+     1) NAVBAR FIX (the menu at the top)
+     ======================================================= */
+
+  /* PROBLEM:
+     Your nav items are in one row.
+     On a phone there isn't enough width to show all items.
+     So items get cut off or pushed off screen.
+
+     FIX:
+     Let the nav WRAP to the next line (like text wrapping).
+     Then reduce spacing so it can fit.
+  */
+  nav ul, 
+  .describe{
+    display: flex;        /* keeps items in a row BUT... */
+    flex-wrap: wrap;      /* ...allows them to drop to next line */
+    justify-content: center; /* centers wrapped rows */
+    gap: 14px;            /* smaller gap = less width used */
+    padding: 10px 8px;    /* smaller padding so bar doesn't get huge */
+    margin: 0;
+  }
+
+  /* PROBLEM:
+     Font size that looks good on desktop becomes huge on mobile.
+     That uses up horizontal space and forces overflow.
+
+     FIX:
+     Smaller font size on phone.
+  */
+  nav a,
+  .describe a{
+    font-size: 16px;  /* smaller so the menu fits */
+  }
+
+
+  /* =======================================================
+     2) BIG TITLE / HERO FIX (Dasmoto’s Arts and Crafts)
+     ======================================================= */
+
+  /* PROBLEM:
+     Your title is extremely large on desktop.
+     On mobile, huge font size causes:
+     - text to wrap weird
+     - text to run into edges
+     - sometimes it even looks "cropped"
+
+     FIX:
+     Make title smaller only on phones.
+  */
+  h1,
+  .title{
+    font-size: 34px;      /* reduced from desktop */
+    line-height: 1.1;     /* keeps lines tight but readable */
+    margin: 16px auto;    /* centers and gives breathing room */
+    text-align: center;
+    padding: 0 10px;      /* prevents text touching screen edges */
+  }
+
+
+  /* =======================================================
+     3) PARAGRAPH TEXT FIX (the paragraph under the banner)
+     ======================================================= */
+
+  /* PROBLEM:
+     Paragraph blocks can feel too wide or too close to edges on mobile.
+
+     FIX:
+     Give it side padding + readable line-height.
+  */
+  p,
+  .bio{
+    font-size: 16px;      /* phone reading size */
+    line-height: 1.5;     /* taller lines = easier reading */
+    padding: 0 14px;      /* keeps text away from screen edge */
+    text-align: center;
+  }
+
+
+  /* =======================================================
+     4) BANNER IMAGE FIX (if your banner image causes weird scaling)
+     ======================================================= */
+
+  /* PROBLEM:
+     Images can overflow if they have a fixed width or weird default sizing.
+
+     FIX:
+     Force all images to NEVER exceed the screen width.
+  */
+  img{
+    max-width: 100%;  /* image will not go wider than the screen */
+    height: auto;     /* keeps proportions correct */
+    display: block;   /* removes little gaps under images */
+  }
+
+
+  /* =======================================================
+     5) SECTION HEADERS (Brushes / Frames / Paint)
+     ======================================================= */
+
+  /* PROBLEM:
+     Your section headers are inside a wide bar.
+     Sometimes the bar is fine, but text can look too large.
+
+     FIX:
+     Slightly smaller font and centered.
+  */
+  h2{
+    font-size: 30px;
+    text-align: center;
+    padding: 8px;
+  }
+
+
+  /* =======================================================
+     6) BUTTON FIX
+     ======================================================= */
+
+  /* PROBLEM:
+     Buttons can look too wide or too cramped.
+
+     FIX:
+     Center them and make them readable.
+  */
+  .btn,
+  button{
+    display: inline-block;
+    font-size: 16px;
+    padding: 12px 16px;
+  }
+
+
+  /* =======================================================
+     7) STOP HORIZONTAL SCROLL (emergency safety rule)
+     ======================================================= */
+
+  /* PROBLEM:
+     If ANY element is wider than the screen,
+     your page can get sideways scrolling.
+
+     FIX:
+     Hide overflow-x so user doesn't see side scrolling.
+     (Not a "real" fix, but a safety net.)
+  */
+  body{
+    overflow-x: hidden;
+  }
+}
+
   }
 
   .footer-bottom{
