@@ -1,0 +1,364 @@
+* {box-sizing:border-box;}
+html{scroll-behavior: smooth;}
+body{
+    margin:0;
+    padding:0;
+    
+
+font-family:Arial, Helvetica, sans-serif;
+
+background: radial-gradient(
+    circle at center,
+    #fff8e7 0%,      /* warm canvas */
+    #ffd6cc 25%,     /* soft coral */
+    #c8f7c5 50%,     /* spring green */
+    #cce7ff 75%,     /* sky blue */
+    #e6d6ff 100%     /* soft plum */
+  );
+  color: #2f243a;
+
+}
+
+.site-header{
+    margin:0;
+    
+    nav {
+  background: linear-gradient(
+    to right,
+    #ff9a8b,   /* coral */
+    #a8e6cf,   /* mint */
+    #9ecfff    /* sky blue */
+  );
+  padding: 15px;
+  
+}
+
+}
+.site-header .details{
+    margin: 0;
+  padding: 18px 0;
+  list-style: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 70px;
+}
+.site-header .details a{
+    
+  color: #2f243a;   /* deep plum charcoal */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.site-header .details a:hover{text-decoration:underline}
+
+
+  
+section h1{
+  gap:30px;
+}
+.title{
+  border: 5px solid whitesmoke;
+  border-radius:5px;
+  background-image: url("resources/images/pattern.jpeg");
+  z-index:1;
+ font-size:50px;
+  height:100px;
+  display:flex;
+ justify-content: center;
+ align-items: center;
+  width: 100%;
+  margin-top:-5px;
+ color:white;
+ font-weight: bold;
+ font-family:'Trebuchet MS', 
+ 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+  
+}
+a{
+  border:solid white black;
+}
+.signup{
+  text-decoration: none;
+  color:salmon;
+  text-align: center;
+   display:flex;
+  align-items: center;
+  justify-content: center;
+  padding-top:30px;
+  
+}
+a:hover{
+color:cadetblue;
+text-decoration: underline;
+}
+.wrapper{
+  width:100%;
+   
+  width: min(1100px, 92%);
+  margin: 0 auto;
+}
+
+
+.container{
+ margin-top:-40px;
+  text-align:center;
+  padding: 50px;
+ font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 
+ 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+ font-size: 25px;
+ 
+}
+
+.hero-title{
+    margin: 0 0 12px;
+ text-align: center;
+  font-size: 44px;   
+  font-weight: 800;
+      border:10px solid slateblue;
+}
+.title-text{
+    margin:0 auto;
+    max-width:900px;
+    font-size:18px;
+    line-height: 1;
+        
+        
+        
+     
+
+}
+ .bio{
+  border:3px solid white;
+}
+.btn{ display:inline-block;
+    padding:14px 16px;
+    border-radius:12px;
+      border: 2px solid rgba(0,0,0,0.35);
+  background: rgba(255,255,255,0.85);
+   color: rgb(89, 89, 181);
+  font-weight: 700;
+  text-decoration: none;
+  cursor:pointer;
+}
+.btn:hover{
+    transform:translateY(-1px);
+}
+.btn:focus{
+  outline: 2px solid rgba(255,255,255,0.65);
+  outline-offset: 2px;}
+
+.btn-outline{
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.35);
+  color: #111;
+}
+
+.hero {
+
+display:grid;
+     
+      
+      
+}
+.sub-head{
+  background-color:#ff9a8b;
+  display:flex;
+  align-content: flex-start;
+  padding-left:30px;
+  width:100%;
+  height: 50px;
+  padding-top:2px;
+  font-size: 35px;
+  color:wheat;
+  opacity: 70%;
+  text-decoration: underline;
+}
+span{
+  color:rgb(202, 124, 22);
+  font-size: medium;
+ 
+}
+.img{
+  
+  display:flex;
+  gap:30px;
+  justify-content: center;
+  
+
+}
+
+
+p{
+  padding-bottom:30px;
+padding-top:20px;
+  margin-top:-20px;
+
+}
+h3{
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:15px;
+}
+.special{
+  font-size: medium;
+}
+
+/* =========================================================
+   FOOTER: OUTER SHELL (FULL WIDTH)
+   ========================================================= */
+
+/*
+  .site-footer is the OUTER footer element.
+  Think of this like the "floor" the footer sits on.
+
+  WHAT this controls:
+  - the background area across the entire screen width
+  - the spacing above/below the footer
+  - the border line that separates footer from the page content
+
+  WHAT this does NOT do:
+  - It does NOT control 3 columns.
+    The columns are controlled by .footer-grid (the inner layout).
+*/
+.site-footer{
+  margin-top: 60px; /* pushes footer away from content above */
+  padding: 40px 0;  /* vertical breathing room inside footer */
+}
+
+
+/* =========================================================
+   FOOTER WRAPPER (CENTERS CONTENT)
+   ========================================================= */
+
+/*
+  .footer-wrap is the "container" INSIDE the footer.
+
+  WHY we need this:
+  - Without a wrapper, the grid tries to use the entire screen width.
+  - That creates huge ugly spacing on large monitors.
+  - A wrapper forces the content to stay in a readable width,
+    aligned with the rest of your page.
+
+  width: min(1100px, 92%)
+  - if screen is huge -> stops at 1100px
+  - if screen is small -> uses 92% of the screen
+*/
+.footer-wrap{
+  width: min(1100px, 92%);
+  margin: 0 auto; /* centers the wrapper horizontally */
+}
+
+
+/* =========================================================
+   FOOTER GRID (THE 3 COLUMN LAYOUT)
+   ========================================================= */
+
+/*
+  .footer-grid is the PARENT of the 3 footer columns.
+
+  KEY IDEA:
+  - The parent controls the columns.
+  - The children just "sit inside" those columns.
+
+  display:grid turns the footer into a grid system.
+
+  grid-template-columns: 1fr 1fr 1fr means:
+  - 3 equal columns
+  - each column takes 1 fraction of available width
+
+  gap controls spacing BETWEEN columns.
+*/
+.footer-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;  /* space between the 3 columns */
+  align-items: start; /* keeps headings aligned at top */
+}
+
+
+/* =========================================================
+   FOOTER COLUMN (CHILD BOX STYLE)
+   ========================================================= */
+
+/*
+  .footer-col is ONE column inside the grid.
+
+  NOTE:
+  - You do NOT put grid-template-columns here because
+    this is a CHILD, not the grid parent.
+*/
+.footer-col{
+  /* Optional: give each column a little internal structure */
+}
+
+/* Headings inside footer */
+.footer-col h3{
+  margin: 0 0 12px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+/* Lists inside footer */
+.footer-col ul{
+  margin: 0;          /* removes default browser top margin */
+  padding-left: 18px; /* controls bullet indent */
+}
+
+/* Each list item */
+.footer-col li{
+  margin: 6px 0;
+}
+
+/* Footer links */
+.footer-col a{
+  text-decoration: underline;
+  color:#ff9a8b;
+}
+.footer-col a:hover{
+  color:cadetblue;
+}
+
+
+/* =========================================================
+   FOOTER BOTTOM (COPYRIGHT LINE)
+   ========================================================= */
+
+/*
+  This is the copyright strip UNDER the 3 columns.
+
+  WHY it was floating weird in your screenshot:
+  - It was not being “contained” in a wrapper width
+    or it was inheriting odd alignment from surrounding elements.
+
+  text-align:center centers it cleanly.
+
+  margin-top separates it from the grid above.
+*/
+.footer-bottom{
+  margin-top: 28px;
+  text-align: center;
+  opacity: 0.9;
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   MOBILE FOOTER RULES
+   ========================================================= */
+
+/*
+  On phones, 3 columns become too tight,
+  so we convert the grid to 1 column.
+*/
+@media (max-width: 900px){
+  .footer-grid{
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .footer-bottom{
+    text-align: left; /* optional: some people prefer left on mobile */
+  }
+}
+
