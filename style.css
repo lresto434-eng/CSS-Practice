@@ -1,4 +1,26 @@
-* {box-sizing:border-box;}
+
+/* =========================================================
+   GLOBAL "STOP OVERFLOW" RULES (SAFE FOR ALL PAGES)
+   ========================================================= */
+
+/* 1) box-sizing makes width math predictable.
+   Without this, padding/borders can make boxes bigger than you think,
+   which causes sideways overflow on phones. */
+*,
+*::before,
+*::after{
+  box-sizing: border-box;
+}
+
+/* 2) Images should never be wider than their container.
+   max-width: 100% means "shrink down to fit the phone".
+   height:auto keeps the image from stretching. */
+img{
+  max-width: 100%;
+  height: auto;
+  display: block; /* removes tiny gap under images */
+}
+
 html{scroll-behavior: smooth;}
 body{
     margin:0;
@@ -366,159 +388,99 @@ h3{
    - makes sideways scrolling
    - or squishes things in ugly ways
 --------------------------------------------------------- */
+/* =========================================================
+   MOBILE FIXES (PHONE LAYOUT)
+   ========================================================= */
 
+/* This media query runs only on smaller screens.
+   If you're testing on a phone, this SHOULD apply. */
 @media (max-width: 600px){
 
-  /* =======================================================
-     1) NAVBAR FIX (the menu at the top)
-     ======================================================= */
+  /* --------------------------------------------
+     NAV FIX
+     -------------------------------------------- */
 
-  /* PROBLEM:
-     Your nav items are in one row.
-     On a phone there isn't enough width to show all items.
-     So items get cut off or pushed off screen.
-
-     FIX:
-     Let the nav WRAP to the next line (like text wrapping).
-     Then reduce spacing so it can fit.
-  */
-  nav ul, 
+  /* Your nav list (the links) needs permission to wrap.
+     flex-wrap allows items to drop to a new line instead of overflowing. */
   .describe{
-    display: flex;        /* keeps items in a row BUT... */
-    flex-wrap: wrap;      /* ...allows them to drop to next line */
-    justify-content: center; /* centers wrapped rows */
-    gap: 14px;            /* smaller gap = less width used */
-    padding: 10px 8px;    /* smaller padding so bar doesn't get huge */
-    margin: 0;
+    display: flex;        /* makes the list act like a flex row */
+    flex-wrap: wrap;      /* allows wrapping to next line */
+    justify-content: center; /* centers the whole group */
+    gap: 12px;            /* spacing between links */
+    padding: 10px 12px;   /* breathing room inside the nav */
   }
 
-  /* PROBLEM:
-     Font size that looks good on desktop becomes huge on mobile.
-     That uses up horizontal space and forces overflow.
-
-     FIX:
-     Smaller font size on phone.
-  */
-  nav a,
+  /* Links shrink slightly on phone so they fit.
+     If font is too large, the nav will look cramped. */
   .describe a{
-    font-size: 16px;  /* smaller so the menu fits */
+    font-size: 14px;      /* smaller text = more space */
+    line-height: 1.2;     /* keeps wrapped words tight, not tall */
+    white-space: normal;  /* allows "Monthly Seminars" to wrap */
   }
 
+  /* --------------------------------------------
+     TITLE / BANNER FIX
+     -------------------------------------------- */
 
-  /* =======================================================
-     2) BIG TITLE / HERO FIX (Dasmoto’s Arts and Crafts)
-     ======================================================= */
-
-  /* PROBLEM:
-     Your title is extremely large on desktop.
-     On mobile, huge font size causes:
-     - text to wrap weird
-     - text to run into edges
-     - sometimes it even looks "cropped"
-
-     FIX:
-     Make title smaller only on phones.
-  */
-  h1,
+  /* Your big H1 text is getting cut off because it's too large.
+     clamp(min, ideal, max):
+       - never smaller than 28px
+       - scales with screen width (8vw)
+       - never bigger than 44px on mobile */
   .title{
-    font-size: 34px;      /* reduced from desktop */
-    line-height: 1.1;     /* keeps lines tight but readable */
-    margin: 16px auto;    /* centers and gives breathing room */
-    text-align: center;
-    padding: 0 10px;      /* prevents text touching screen edges */
+    font-size: clamp(28px, 8vw, 44px);
+    line-height: 1.05;      /* tighter line height so it doesn't eat vertical space */
+    text-align: center;     /* centers the title text */
+    margin: 12px auto;      /* centers the block itself */
+    padding: 8px 12px;      /* stops text from touching edges */
   }
 
-
-  /* =======================================================
-     3) PARAGRAPH TEXT FIX (the paragraph under the banner)
-     ======================================================= */
-
-  /* PROBLEM:
-     Paragraph blocks can feel too wide or too close to edges on mobile.
-
-     FIX:
-     Give it side padding + readable line-height.
-  */
-  p,
-  .bio{
-    font-size: 16px;      /* phone reading size */
-    line-height: 1.5;     /* taller lines = easier reading */
-    padding: 0 14px;      /* keeps text away from screen edge */
-    text-align: center;
+  /* If your title is sitting on top of an image background and getting clipped,
+     the parent might be too short. This forces the banner area to "grow"
+     instead of chopping the title. */
+  .t{
+    padding: 10px 12px;
   }
 
+  /* --------------------------------------------
+     INTRO PARAGRAPH FIX
+     -------------------------------------------- */
 
-  /* =======================================================
-     4) BANNER IMAGE FIX (if your banner image causes weird scaling)
-     ======================================================= */
-
-  /* PROBLEM:
-     Images can overflow if they have a fixed width or weird default sizing.
-
-     FIX:
-     Force all images to NEVER exceed the screen width.
-  */
-  img{
-    max-width: 100%;  /* image will not go wider than the screen */
-    height: auto;     /* keeps proportions correct */
-    display: block;   /* removes little gaps under images */
+  /* Your intro text block is taking full width and looks too wide/ugly.
+     This makes it narrower and centered. */
+  .bio,
+  .title-text,
+  .title\.text{ /* NOTE: your class name ".title.text" is weird, see note below */
+    max-width: 92%;       /* keeps it inside phone screen */
+    margin: 0 auto;       /* centers it */
+    text-align: center;   /* centers the actual text */
+    font-size: 16px;      /* readable phone size */
+    line-height: 1.4;     /* gives space between lines */
   }
 
+  /* --------------------------------------------
+     SECTION HEADERS (BRUSHES / FRAMES / PAINT)
+     -------------------------------------------- */
 
-  /* =======================================================
-     5) SECTION HEADERS (Brushes / Frames / Paint)
-     ======================================================= */
-
-  /* PROBLEM:
-     Your section headers are inside a wide bar.
-     Sometimes the bar is fine, but text can look too large.
-
-     FIX:
-     Slightly smaller font and centered.
-  */
+  /* Your section bars are very wide/tall on mobile.
+     This makes them responsive and not "too huge". */
   h2{
-    font-size: 30px;
+    font-size: 32px;
+    line-height: 1.1;
     text-align: center;
-    padding: 8px;
   }
 
+  /* --------------------------------------------
+     BODY SPACING (prevents cramped look)
+     -------------------------------------------- */
 
-  /* =======================================================
-     6) BUTTON FIX
-     ======================================================= */
-
-  /* PROBLEM:
-     Buttons can look too wide or too cramped.
-
-     FIX:
-     Center them and make them readable.
-  */
-  .btn,
-  button{
-    display: inline-block;
-    font-size: 16px;
-    padding: 12px 16px;
-  }
-
-
-  /* =======================================================
-     7) STOP HORIZONTAL SCROLL (emergency safety rule)
-     ======================================================= */
-
-  /* PROBLEM:
-     If ANY element is wider than the screen,
-     your page can get sideways scrolling.
-
-     FIX:
-     Hide overflow-x so user doesn't see side scrolling.
-     (Not a "real" fix, but a safety net.)
-  */
   body{
-    overflow-x: hidden;
+    padding-left: 0;
+    padding-right: 0;
+    overflow-x: hidden; /* last defense: prevents sideways scrolling */
   }
 }
 
-  }
 
   .footer-bottom{
     text-align: left; /* optional: some people prefer left on mobile */
